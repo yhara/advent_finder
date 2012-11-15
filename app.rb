@@ -2,6 +2,7 @@
 require 'singleton'
 require 'pp'
 require 'uri'
+require 'json'
 
 require 'mechanize'
 require 'sinatra/base'

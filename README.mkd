@@ -3,7 +3,7 @@ Advent Finder
 
 A tool I'm using to find Japanese Tech Advent Calendars.
 
-![screenshot](ss.png)
+![screenshot](https://raw.github.com/yhara/advent_finder/master/ss.png)
 
 If you want to try it on your machine:
 

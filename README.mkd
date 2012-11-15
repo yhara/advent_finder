@@ -1,7 +1,7 @@
 Advent Finder
 =============
 
-A tool I'm using to find Japanese Tech Advent Calendars.
+A tool I'm using to find [Japanese Tech Advent Calendars 2012](http://matome.naver.jp/odai/2135217818800380701).
 
 ![screenshot](https://raw.github.com/yhara/advent_finder/master/ss.png)
 

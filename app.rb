@@ -1,5 +1,7 @@
+# coding: utf-8
 require 'singleton'
 require 'pp'
+require 'uri'
 
 require 'mechanize'
 require 'sinatra/base'
@@ -27,12 +29,13 @@ class Scraper
   end
 
   def atnd
-    json_str = @agent.get("http://api.atnd.org/events/", 
-                          keyword: "advent",
-                          ym: "201212",
-                          count: 100,
-                          format: "json").body
+    json_str = @agent.get(["http://api.atnd.org/events/?",
+                          "keyword_or=advent,アドベント&",
+                          "ym=201212&",
+                          "count=100&",
+                          "format=json"].join).body
     return JSON.parse(json_str)["events"].
+      slice(0, LIMIT*2).
       map{|event|
         ["(#{event['updated_at']}) #{event['title']}", event['event_url']]
       }

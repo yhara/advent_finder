@@ -1,30 +1,17 @@
-Sinatra Project Template for me
-===============================
+Advent Finder
+=============
 
-Ready-to-go set of files for making small Sinatra app.
+A tool I'm using to find Japanese Tech Advent Calendars.
 
-Combination of:
+![screenshot](ss.png)
 
-* slim for template
-* sass for CSS
-* sinatra-reloader for development
+If you want to try it on your machine:
 
-Usage
-=====
-
-  $ git clone https://github.com/yhara/sinatra_project_template myproject
-  $ cd myproject
+  $ git clone https://github.com/yhara/advent_finder
+  $ cd advent_finder
   $ bundle install
   $ rackup -p 4000
   $ open http://localhost:4000/
-
-Start development
------------------
-
-* Edit app.rb for application code
-* Edit views/index.slim for view (or add your own \*.slim)
-* Edit views/layout.slim for layouts
-* Edit views/screen.sass for stylesheet
 
 License
 =======
@@ -35,5 +22,9 @@ public/favicon.ico : [famfamfam Silk icons](http://www.famfamfam.com/lab/icons/s
 
 Contact
 =======
+
+https://github.com/yhara/advent_finder
+
+This project is using:
 
 https://github.com/yhara/sinatra_project_template

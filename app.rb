@@ -44,7 +44,7 @@ class Scraper
                           "count=100&",
                           "format=json"].join).body
     return JSON.parse(json_str)["events"].
-      slice(0, LIMIT*2).
+      slice(0, LIMIT*4).
       map{|event|
         ["(#{event['updated_at']}) #{event['title']}", event['event_url']]
       }

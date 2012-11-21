@@ -57,3 +57,13 @@ ul
       a href=(url)
         = text
   li ...
+
+h2 Connpass
+
+ul
+  - Scraper.instance.connpass.each do |text, url|
+    li 
+      a href=(url)
+        = text
+  li ...
+

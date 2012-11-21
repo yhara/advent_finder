@@ -76,6 +76,19 @@ class Scraper
           "http://partake.in/events/#{event['id']}"]
       }
   end
+
+  def connpass
+    json_str = @agent.get(["http://connpass.com/api/v1/event/?",
+                           "keyword_or=advent,アドベント&",
+                           "ym=201212&",
+                           "count=100",
+                           "format=json"].join).body
+    return JSON.parse(json_str)["events"].
+      slice(0, LIMIT).
+      map{|event|
+        ["(#{event['updated_at']}) #{event['title']}", event['event_url']]
+      }
+  end
 end
 
 class MyApp < Sinatra::Base

@@ -18,6 +18,14 @@ class Scraper
     @agent = Mechanize.new
   end
 
+  IGNORE_USERS = %w(manga_osyo ne_sachirou katsyoshi )
+  def twitter_url
+    return "https://twitter.com/search/realtime?q=" + 
+      ['"advent+calendar"', "OR", URI.encode("アドベント"),
+        *IGNORE_USERS.map{|s| "-#{s}"},
+        "lang%3Aja&src=typd"].join("+")
+  end
+
   def qiita
     doc = @agent.get("http://qiita.com/advent-calendar").root
     return doc.search("a[href^='/advent-calendar/2012']").

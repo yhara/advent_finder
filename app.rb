@@ -3,15 +3,18 @@ require 'singleton'
 require 'pp'
 require 'uri'
 require 'json'
+require 'fileutils'
 
 require 'mechanize'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'rack/utils'
 require 'slim'
 require 'sass'
 
 class Scraper
   include Singleton
+  include Rack::Utils # escape, escape_html
   LIMIT = 5
 
   def initialize
@@ -27,15 +30,29 @@ class Scraper
   end
 
   def qiita
-    doc = @agent.get("http://qiita.com/advent-calendar").root
-    return doc.search("a[href^='/advent-calendar/2012']").
-      reject{|a| a['href'].end_with?("new")}.
-      reject{|a| a.text == ">"}.
-      slice(0, LIMIT).
-      map{|a| 
-        [a.text, "http://qiita.com#{a['href']}"]
-      }
+    doc = @agent.get("http://qiita.com/advent-calendar/2013").root
+    links = doc.search("a[href^='/advent-calendar/2013/']")
+              .reject{|a| a[:href] == '/advent-calendar/2013/new'}
+    
+    FileUtils.touch("qiita_cache.txt")
+    FileUtils.touch("qiita_last.txt")
+    File.write("qiita_curr.txt", format_qiita_links(links))
+    if (diff = `diff qiita_last.txt qiita_curr.txt`).empty?
+      diff = File.read("qiita_cache.txt")
+    else
+      File.write("qiita_last.txt", format_qiita_links(links))
+      File.write("qiita_cache.txt", diff)
+    end
+
+    return diff
   end
+
+  def format_qiita_links(links)
+    return links.map{|a|
+      "#{a.at('.title').text.strip} -- http://qiita.com/#{a[:href]}\n"
+    }.join
+  end
+  private :format_qiita_links
 
   def atnd
     json_str = @agent.get(["http://api.atnd.org/events/?",

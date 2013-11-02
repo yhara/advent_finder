@@ -31,12 +31,8 @@ h2
   a href="http://qiita.com/advent-calendar"
    | Qiita
 
-ul
-  - Scraper.instance.qiita.each do |text, url|
-    li 
-      a href=(url)
-        = text
-  li ...
+pre
+  = Scraper.instance.qiita
 
 //h2 ATND
 //

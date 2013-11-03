@@ -57,7 +57,7 @@ class Scraper
   def atnd
     json_str = @agent.get(["http://api.atnd.org/events/?",
                           "keyword_or=advent,アドベント&",
-                          "ym=201212&",
+                          "ym=201312&",
                           "count=100&",
                           "format=json"].join).body
     return JSON.parse(json_str)["events"].
@@ -97,7 +97,7 @@ class Scraper
   def connpass
     json_str = @agent.get(["http://connpass.com/api/v1/event/?",
                            "keyword_or=advent,アドベント&",
-                           "ym=201212&",
+                           "ym=201312&",
                            "count=100",
                            "format=json"].join).body
     return JSON.parse(json_str)["events"].

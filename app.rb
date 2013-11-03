@@ -106,6 +106,19 @@ class Scraper
         ["(#{event['updated_at']}) #{event['title']}", event['event_url']]
       }
   end
+
+  def zusaar
+    json_str = @agent.get(["http://www.zusaar.com/api/event/?",
+                           "keyword_or=advent,アドベント&",
+                           "ym=201312&",
+                           "count=100&",
+                           "format=json"].join).body
+    return JSON.parse(json_str)["event"].
+      slice(0, LIMIT).
+      map{|event|
+        ["(#{event['updated_at']}) #{event['title']}", event['event_url']]
+      }
+  end
 end
 
 class MyApp < Sinatra::Base

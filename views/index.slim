@@ -34,14 +34,18 @@ h2
 pre
   = Scraper.instance.qiita
 
-//h2 ATND
-//
-//ul
-//  - Scraper.instance.atnd.each do |text, url|
-//    li 
-//      a href=(url)
-//        = text
-//  li ...
+h2 
+  a href="https://www.google.co.jp/search?q=site%3Aatnd.org+advent+calendar+2013&oq=site%3Aatnd.org+advent+calendar+2013&aqs=chrome..69i57j69i58.5005j0j7&sourceid=chrome&espv=210&es_sm=91&ie=UTF-8#es_sm=91&espv=210&q=inurl:http://atnd.org/events/+advent+calendar&safe=off&tbs=qdr:m,sbd:1"
+    | ATND beta
+
+h2 eventATND
+
+ul
+  - Scraper.instance.event_atnd.each do |text, url|
+    li 
+      a href=(url)
+        = text
+  li ...
 
 h2 
   a href="http://www.adventar.org/"
@@ -81,4 +85,3 @@ ul
 //      a href=(url)
 //        = text
 //  li ...
-

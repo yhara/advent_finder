@@ -54,15 +54,16 @@ class Scraper
   end
   private :format_qiita_links
 
-  def atnd
-    json_str = @agent.get(["http://api.atnd.org/events/?",
+  def event_atnd
+    json_str = @agent.get(["http://api.atnd.org/eventatnd/event/?",
                           "keyword_or=advent,アドベント&",
                           "ym=201312&",
                           "count=100&",
                           "format=json"].join).body
     return JSON.parse(json_str)["events"].
       slice(0, LIMIT*4).
-      map{|event|
+      map{|_event|
+        event = _event["event"][0]
         ["(#{event['updated_at']}) #{event['title']}", event['event_url']]
       }
   end

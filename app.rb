@@ -31,8 +31,7 @@ class Scraper
 
   def qiita
     doc = @agent.get("http://qiita.com/advent-calendar/2013").root
-    links = doc.search("a[href^='/advent-calendar/2013/']")
-              .reject{|a| a[:href] == '/advent-calendar/2013/new'}
+    links = doc.search("a.calendar-name")
     
     FileUtils.touch("qiita_cache.txt")
     FileUtils.touch("qiita_last.txt")
@@ -49,7 +48,7 @@ class Scraper
 
   def format_qiita_links(links)
     return links.map{|a|
-      "#{a.at('.title').text.strip} -- http://qiita.com/#{a[:href]}\n"
+      "#{a.text.strip} -- http://qiita.com/#{a[:href]}\n"
     }.join
   end
   private :format_qiita_links

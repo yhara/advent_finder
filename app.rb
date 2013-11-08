@@ -53,6 +53,13 @@ class Scraper
   end
   private :format_qiita_links
 
+  def atnd_beta
+    doc = @agent.get("https://www.google.co.jp/search?es_sm=91&espv=210&q=inurl:http://atnd.org/events/+advent+calendar&safe=off&tbs=qdr:m,sbd:1&cad=h").root
+    return doc.search("a[href^='/url?q=http://atnd.org']")
+              .slice(0, LIMIT)
+              .map{|a| [a.text.strip, "http://www.google.co.jp"+a[:href]]}
+  end
+
   def event_atnd
     json_str = @agent.get(["http://api.atnd.org/eventatnd/event/?",
                           "keyword_or=advent,アドベント&",

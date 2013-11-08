@@ -36,7 +36,14 @@ pre
 
 h2 
   a href="https://www.google.co.jp/search?q=site%3Aatnd.org+advent+calendar+2013&oq=site%3Aatnd.org+advent+calendar+2013&aqs=chrome..69i57j69i58.5005j0j7&sourceid=chrome&espv=210&es_sm=91&ie=UTF-8#es_sm=91&espv=210&q=inurl:http://atnd.org/events/+advent+calendar&safe=off&tbs=qdr:m,sbd:1"
-    | ATND beta
+    | ATND beta (google search)
+
+ul
+  - Scraper.instance.atnd_beta.each do |text, url|
+    li 
+      a href=(url)
+        = text
+  li ...
 
 h2 eventATND
 

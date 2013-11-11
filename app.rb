@@ -57,7 +57,7 @@ class Scraper
     doc = @agent.get("https://www.google.co.jp/search?es_sm=91&espv=210&q=inurl:http://atnd.org/events/+advent+calendar&safe=off&tbs=qdr:m,sbd:1&cad=h").root
     return doc.search("a[href^='/url?q=http://atnd.org']")
               .slice(0, LIMIT)
-              .map{|a| [a.text.strip, "http://www.google.co.jp"+a[:href]]}
+              .map{|a| [a.text.strip, a[:href][%r{http://atnd.org/[^&]+}]]}
   end
 
   def event_atnd

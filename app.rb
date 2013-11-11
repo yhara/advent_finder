@@ -21,7 +21,7 @@ class Scraper
     @agent = Mechanize.new
   end
 
-  IGNORE_USERS = %w(manga_osyo ne_sachirou katsyoshi gift_present_jp)
+  IGNORE_USERS = %w(karencalen)
   def twitter_url
     return "https://twitter.com/search/realtime?q=" + 
       ['"advent+calendar"', "OR", URI.encode("アドベント+カレンダー"), "OR", URI.encode("アドベントカレンダー"),

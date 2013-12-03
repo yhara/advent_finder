@@ -75,7 +75,7 @@ class Scraper
   end
   
   def adventar
-    doc = @agent.get("http://www.adventar.org/").root
+    doc = @agent.get("http://www.adventar.org/calendars").root
     return doc.search("a[href^='/calendars/'][style^='background']").
       reject{|a| a['href'] =~ /new/}.
       reverse.

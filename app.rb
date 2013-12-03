@@ -43,15 +43,21 @@ class Scraper
       File.write("qiita_cache.txt", diff)
     end
 
-    return diff
+    return autolink_diff(diff)
   end
 
   def format_qiita_links(links)
     return links.map{|a|
-      "#{a.text.strip} -- http://qiita.com/#{a[:href]}\n"
+      "#{a.text.strip} -- http://qiita.com#{a[:href]}\n"
     }.join
   end
   private :format_qiita_links
+
+  def autolink_diff(diff)
+    return escape_html(diff).gsub(%r{http:&#x2F;&#x2F;.*}){|matched|
+      "<a href='#{matched}'>#{matched}</a>"
+    }
+  end
 
   def atnd_beta
     doc = @agent.get("https://www.google.co.jp/search?es_sm=91&espv=210&q=inurl:http://atnd.org/events/+advent+calendar&safe=off&tbs=qdr:m,sbd:1&cad=h").root
